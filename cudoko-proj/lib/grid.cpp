@@ -10,6 +10,12 @@ Grid::Grid(const Dimensions& gridSize, const std::string& fillChar)
     grid = std::vector<std::vector<char>>(gridSize.y, std::vector<char>(gridSize.x, fillChar[0]));
 }
 
+Grid::Grid() {
+    gridSize.x = 0;
+    gridSize.y = 0;
+    grid = std::vector<std::vector<char>>(gridSize.y, std::vector<char>(gridSize.x, fillChar[0]));
+}
+
 std::vector<int> Grid::rows() const {
     std::vector<int> rows(gridSize.y);
     for (int i = 0; i < gridSize.y; ++i) {
