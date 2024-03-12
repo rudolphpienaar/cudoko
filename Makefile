@@ -14,7 +14,7 @@ LFLAGS :=
 LIBS :=
 
 # Define the C++ source files
-SRCS := cudoko-proj/main.cpp cudoko-proj/models/data.cpp cudoko-proj/lib/path.cpp cudoko-proj/cudoko-proj.cpp cudoko-proj/lib/wordIterate.cpp cudoko-proj/lib/board.cpp cudoko-proj/lib/trajectory.cpp cudoko-proj/lib/grid.cpp
+SRCS := cudoko-proj/main.cpp cudoko-proj/models/data.cpp cudoko-proj/lib/path.cpp cudoko-proj/cudoko.cpp cudoko-proj/lib/wordIterate.cpp cudoko-proj/lib/board.cpp cudoko-proj/lib/trajectory.cpp cudoko-proj/lib/grid.cpp
 
 # Define the C++ object files
 OBJS := $(SRCS:.cpp=.o)
