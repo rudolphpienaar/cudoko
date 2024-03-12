@@ -11,7 +11,8 @@
 // Include other necessary headers and libraries
 #include "argh.h"
 #include "models/data.h"
-#include "lib/board.h"
+#include "lib/grid.h"
+/* #include "lib/board.h" */
 
 
 // Define the version and other constants
@@ -69,7 +70,7 @@ private:
     Dimensions gridSize;
     std::vector<std::string> words;
     std::vector<std::string> wordsExclude;
-    Solution solution;
+    /* Solution solution; */
 
 public:
     Wudoko(std::map<std::string, std::string> optionsMap = {}) {
@@ -88,11 +89,11 @@ public:
         /* } */
         gridSize = gridDimensions_set();
         words_populate();
-        solution = Solution();
-        solution.legalWords = words;
-        if (!wordsExclude.empty()) {
-            solution.illegalWords = wordsExclude;
-        }
+        /* solution = Solution(); */
+        /* solution.legalWords = words; */
+        /* if (!wordsExclude.empty()) { */
+        /*     solution.illegalWords = wordsExclude; */
+        /* } */
     }
 
     Dimensions gridDimensions_set() {
@@ -143,10 +144,10 @@ public:
         }
         std::cout << std::endl;
         Grid initialGrid(gridSize, " ");
-        WordIterate wordIterator(words);
-        solution.add_word(initialGrid, wordIterator);
-        std::cout << "\nAll boards:" << std::endl;
-        boards_headerPrint(solution.boards.size());
+        /* WordIterate wordIterator(words); */
+        /* solution.add_word(initialGrid, wordIterator); */
+        /* std::cout << "\nAll boards:" << std::endl; */
+        /* boards_headerPrint(solution.boards.size()); */
     }
 
     void prune_illegalBoards() {
@@ -156,19 +157,19 @@ public:
                 std::cout << word << " ";
             }
             std::cout << std::endl;
-            auto illegalSolutions = solution.pruneFromSolution(wordsExclude);
-            if (!illegalSolutions.empty()) {
-                std::cout << "Disallowed Solutions:" << std::endl;
-                boards_headerPrint(illegalSolutions.size(), "illegal");
-                std::cout << "Legal Solutions:" << std::endl;
-            }
+            /* auto illegalSolutions = solution.pruneFromSolution(wordsExclude); */
+            /* if (!illegalSolutions.empty()) { */
+            /*     std::cout << "Disallowed Solutions:" << std::endl; */
+            /*     boards_headerPrint(illegalSolutions.size(), "illegal"); */
+            /*     std::cout << "Legal Solutions:" << std::endl; */
+            /* } */
         }
     }
 
     void solve() {
         solve_allBoards();
         prune_illegalBoards();
-        boards_print(solution.boards);
+        /* boards_print(solution.boards); */
         std::cout << "done!" << std::endl;
     }
 };
