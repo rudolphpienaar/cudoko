@@ -1,68 +1,48 @@
-#include <iostream>
-#include <string>
-#include <map>
-#include <stdexcept>
+// Source file (Grid.cpp)
 
-// Equivalent to Python's Enum
-enum class GridDir {
-    N = 1,
-    S,
-    E,
-    W,
-    NE,
-    NW,
-    SE,
-    SW
-};
+#include "data.h"
 
-enum class Orient {
-    row = 1,
-    col
-};
+bool Space::has(const std::string& attrib) {
+    return attributes.find(attrib) != attributes.end();
+}
 
-// Equivalent to Python's BaseSettings
-struct GridCoord {
-    int x = 0;
-    int y = 0;
-
-    GridCoord operator+(const GridCoord& coord) {
-        return GridCoord{this->x + coord.x, this->y + coord.y};
+bool Space::rm(const std::string& attrib) {
+    if (!has(attrib)) {
+        return false;
     }
+    attributes.erase(attrib);
+    return true;
+}
 
-    std::string to_string() {
-        return "(" + std::to_string(this->x) + ", " + std::to_string(this->y) + ")";
-    }
+GridCoord::GridCoord(int x, int y): x(x), y(y) {}
 
-    std::pair<int, int> to_tuple() {
-        return std::make_pair(this->x, this->y);
-    }
-};
+GridCoord GridCoord::operator+(const GridCoord& coord) {
+    return GridCoord{x + coord.x, y + coord.y};
+}
 
-// Just another name for a GridCoord
-using Dimensions = GridCoord;
+std::string GridCoord::to_string() const {
+    return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+}
 
-// Equivalent to Python's Namespace
-class Space {
-    std::map<std::string, int> attributes;
+std::pair<int, int> GridCoord::to_tuple() const {
+    return std::make_pair(x, y);
+}
 
-public:
-    bool has(const std::string& attrib) {
-        return attributes.find(attrib) != attributes.end();
-    }
+Dimensions::Dimensions(): x(0), y(0) {}
+Dimensions::Dimensions(int x, int y): x(x), y(y) {}
 
-    bool rm(const std::string& attrib) {
-        if (!has(attrib)) {
-            return false;
-        }
-        attributes.erase(attrib);
-        return true;
-    }
-};
 
-// Equivalent to Python's custom exception class
-class BreakOut : public std::exception {
-    const char* what() const throw() {
-        return "BreakOut exception occurred";
-    }
-};
+std::vector<GridDir> GridDirValues() {
+    return {
+        GridDir::N,
+        GridDir::S,
+        GridDir::E,
+        GridDir::W,
+        GridDir::NE,
+        GridDir::NW,
+        GridDir::SE,
+        GridDir::SW,
+
+    };
+}
 

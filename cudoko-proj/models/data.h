@@ -1,12 +1,12 @@
+// Header file (Grid.h)
 #ifndef DATA_H
 #define DATA_H
 
-#include <iostream>
 #include <string>
+#include <vector>
 #include <map>
-#include <utility>
+#include <exception>
 
-// Equivalent to Python's Enum
 enum class GridDir {
     N = 1,
     S,
@@ -16,44 +16,52 @@ enum class GridDir {
     NW,
     SE,
     SW
+
 };
+
+std::vector<GridDir> GridDirValues();
 
 enum class Orient {
     row = 1,
     col
 };
 
-// Equivalent to Python's BaseSettings
-struct GridCoord {
-    int x;
-    int y;
+class GridCoord {
+public:
+    int x = 0;
+    int y = 0;
 
-    GridCoord(int x = 0, int y = 0);
+    GridCoord(int x, int y);
     GridCoord operator+(const GridCoord& coord);
-    std::string to_string();
-    std::pair<int, int> to_tuple();
+    std::string to_string() const;
+    std::pair<int, int> to_tuple() const;
 };
 
-// Just another name for a GridCoord
-using Dimensions = GridCoord;
+class Dimensions {
+public:
+    int x = 0;
+    int y = 0;
 
-// Equivalent to Python's Namespace
+    Dimensions();
+    Dimensions(int x, int y);
+};
+
 class Space {
-    public:
-    std::map<std::string, int> attributes;
-    std::string gridSize;
-    std::string wordInclude;
-    std::string wordExclude;
-
+public:
     bool has(const std::string& attrib);
     bool rm(const std::string& attrib);
+
+    std::string     gridSize = "";
+
+private:
+    std::map<std::string, int> attributes;
 };
 
-// Equivalent to Python's custom exception class
 class BreakOut : public std::exception {
-public:
-    const char* what() const throw();
+    const char * what() const throw() {
+        return "BreakOut exception occurred";
+    }
 };
 
-#endif // DATA_H
+#endif
 
