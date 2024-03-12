@@ -9,7 +9,7 @@ Trajectory::Trajectory(const Dimensions& gridSize)
 std::vector<Path> Trajectory::paths_find(const GridCoord& origin, int length) {
     paths.clear();
 
-    for (const auto& direction : GridDir::values()) {
+    for (const auto& direction : GridDirValues()) {
         bool canAddPath = true;
         Path path(origin, gridSize);
 

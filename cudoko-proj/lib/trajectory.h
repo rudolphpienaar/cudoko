@@ -12,7 +12,6 @@ public:
 
     std::vector<Path> paths_find(const GridCoord& origin, int length);
 
-private:
     Dimensions gridSize;
     std::vector<Path> paths;
 };

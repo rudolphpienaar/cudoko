@@ -1,6 +1,7 @@
 // Grid.cpp
 #include "grid.h"
 #include "../models/data.h"
+#include "trajectory.h"
 #include <iostream>
 #include <sstream>
 
@@ -29,7 +30,7 @@ char Grid::get(const GridCoord& coord) const {
     int x, y;
     std::tie(x, y) = coord.to_tuple();
     if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) {
-        throw std::out_of_range("Coordinate " + coord.toString() + " is out of bounds");
+        throw std::out_of_range("Coordinate " + coord.to_string() + " is out of bounds");
     }
     return grid[y][x];
 }
@@ -61,7 +62,7 @@ char Grid::set(const GridCoord& coord, const std::string& value) {
     int x, y;
     std::tie(x, y) = coord.to_tuple();
     if (x < 0 || x >= gridSize.x || y < 0 || y >= gridSize.y) {
-        throw std::out_of_range("Coordinate " + coord.toString() + " is out of bounds");
+        throw std::out_of_range("Coordinate " + coord.to_string() + " is out of bounds");
     }
     if (value.length() != 1) {
         throw std::invalid_argument("Character must be a single character string, got '" + value + "'");
@@ -127,7 +128,7 @@ std::vector<GridCoord> Grid::has_char(const std::string& ch) const {
     std::vector<GridCoord> indices;
     for (int y = 0; y < gridSize.y; ++y) {
         for (int x = 0; x < gridSize.x; ++x) {
-            if (grid[y][x] == char[0]) {
+            if (grid[y][x] == ch[0]) {
                 indices.emplace_back(x, y);
             }
         }

@@ -10,6 +10,7 @@
 class Grid {
 public:
     Grid(const Dimensions& gridSize, const std::string& fillChar = "*");
+    Grid();
 
     std::vector<int> rows() const;
     std::vector<int> cols() const;

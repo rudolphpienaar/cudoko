@@ -16,7 +16,6 @@ public:
     GridCoord dv_get(GridDir direction) const;
     std::vector<GridCoord> grow(GridDir direction, int distance);
 
-private:
     Dimensions gridSize;
     std::vector<GridCoord> path;
 };
