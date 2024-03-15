@@ -1,8 +1,10 @@
 # Define the C++ compiler
-CXX := clang++
+# CXX := clang++
+CXX := g++
 
 # Define any compile-time flags
-CXXFLAGS := --debug 
+# CXXFLAGS := --debug 
+CXXFLAGS := -g 
 
 # Define any directories containing header files other than /usr/include
 INCLUDES := -I./cudoko-proj/models -I./cudoko-proj/lib -I./cudoko-proj
