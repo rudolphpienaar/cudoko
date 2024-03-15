@@ -2,39 +2,43 @@
 #ifndef CUDOKO_H
 #define CUDOKO_H
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
+
+#include "lib/board.h"
+#include "models/data.h"
 // Include the header for the Argh class
 #include "argh.h"
 
-// Assuming Dimensions, Space, Solution, WordIterate, and Grid are already defined in their respective headers
+// Assuming Dimensions, Space, Solution, WordIterate, and Grid are already
+// defined in their respective headers
 
-class Wudoko {
+Space parser_setup(int argc, char const *argv[], int &retval);
+
+class Cudoko {
 public:
-    Wudoko(std::map<std::string, std::string> optionsMap = {});
-    void solve();
+  Space options;
+  std::string desc;
+  Dimensions gridSize;
+  std::vector<std::string> words;
+  std::vector<std::string> wordsExclude;
+  Solution solution;
 
-private:
-    Space options;
-    std::string desc;
-    Dimensions gridSize;
-    std::vector<std::string> words;
-    std::vector<std::string> wordsExclude;
-    Solution solution;
-
-    Dimensions gridDimensions_set();
-    void words_populate();
-    void boards_headerPrint(int numberOfBoards, std::string qualifier = "solution");
-    void boards_print(const std::vector<Grid>& boards);
-    void solve_allBoards();
-    void prune_illegalBoards();
+  Dimensions gridDimensions_set();
+  Cudoko(const Space &optionsMap = {});
+  void solve();
+  void words_populate();
+  void boards_headerPrint(int numberOfBoards,
+                          const std::string qualifier = "solution");
+  void boards_print(const std::vector<Grid> &boards);
+  void solve_allBoards();
+  void prune_illegalBoards();
 };
 
 // Function declarations
-Argh parser_setup(int argc, char const* argv[]);
-bool namespace_isempty(std::map<std::string, std::string>& namespace_map);
-std::vector<std::string> wordFile_read(std::string filename);
+bool namespace_isempty(std::map<std::string, std::string> &namespace_map);
+std::vector<std::string> wordFile_read(std::string filename,
+                                       bool shouldsort = false);
 
 #endif // CUDOKO_H
-
