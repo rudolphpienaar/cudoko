@@ -2,66 +2,66 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <exception>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
-#include <exception>
 
 enum class GridDir {
-    N = 1,
-    S,
-    E,
-    W,
-    NE,
-    NW,
-    SE,
-    SW
+  N = 1,
+  S,
+  E,
+  W,
+  NE,
+  NW,
+  SE,
+  SW
 
 };
 
 std::vector<GridDir> GridDirValues();
+std::string gridDirName(GridDir gridDir);
 
-enum class Orient {
-    row = 1,
-    col
-};
+enum class Orient { row = 1, col };
 
 class GridCoord {
 public:
-    int x = 0;
-    int y = 0;
+  int x = 0;
+  int y = 0;
 
-    GridCoord(int x, int y);
-    GridCoord operator+(const GridCoord& coord);
-    std::string to_string() const;
-    std::pair<int, int> to_tuple() const;
+  GridCoord(int x, int y);
+  GridCoord operator+(const GridCoord &coord);
+  std::string to_string() const;
+  std::pair<int, int> to_tuple() const;
 };
 
 class Dimensions {
 public:
-    int x = 0;
-    int y = 0;
+  int x = 0;
+  int y = 0;
 
-    Dimensions();
-    Dimensions(int x, int y);
+  Dimensions();
+  Dimensions(int x, int y);
 };
 
 class Space {
 public:
-    bool has(const std::string& attrib);
-    bool rm(const std::string& attrib);
+  Space();
+  std::string gridSize = "";
+  int rows, cols;
+  std::string wordsIncludeFile = "";
+  std::string wordsExcludeFile = "";
+  bool man = false;
+  bool version = false;
 
-    std::string     gridSize = "";
-
-private:
-    std::map<std::string, int> attributes;
+  std::map<std::string, int> attributes;
+  std::string str();
+  bool has(const std::string &attrib);
+  bool rm(const std::string &attrib);
 };
 
 class BreakOut : public std::exception {
-    const char * what() const throw() {
-        return "BreakOut exception occurred";
-    }
+  const char *what() const throw() { return "BreakOut exception occurred"; }
 };
 
 #endif
-
