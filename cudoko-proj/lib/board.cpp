@@ -42,22 +42,26 @@ Grid Solution::add_word(Grid grid, WordIterate nextWordIterator) {
   }
 
   GridCoord cell(0, 0);
-  for (const GridCoord &c : grid.gridCoords_get()) {
-    if (!grid.cell_isEmpty(c)) {
-      continue;
-    }
-
-    Trajectory trajectory(grid.gridSize);
-    std::vector<Path> trajectories = trajectory.paths_find(c, word.length());
-
-    for (const Path &path : trajectories) {
-      Grid newGrid = grid.copy();
-      if (newGrid.word_canInsert(word, path)) {
-        newGrid.word_insert(word, path);
-        WordIterate newWordIterator = nextWordIterator.copy();
-        Grid nextGrid = add_word(newGrid, newWordIterator);
-        terminate(nextGrid);
+  for(int x = 0; x < grid.gridSize.x; x++) {
+    for(int y = 0; y < grid.gridSize.y; y++) {
+      GridCoord c(x, y);
+      if (!grid.cell_isEmpty(c)) {
+        continue;
       }
+
+      Trajectory trajectory(grid.gridSize);
+      std::vector<Path> trajectories = trajectory.paths_find(c, word.length());
+
+      for (const Path &path : trajectories) {
+        Grid newGrid = grid.copy();
+        if (newGrid.word_canInsert(word, path)) {
+          newGrid.word_insert(word, path);
+          WordIterate newWordIterator = nextWordIterator.copy();
+          Grid nextGrid = add_word(newGrid, newWordIterator);
+          terminate(nextGrid);
+        }
+      }
+
     }
   }
 
