@@ -122,7 +122,7 @@ void Cudoko::boards_headerPrint(int numberOfBoards,
 
 void Cudoko::boards_print(const std::vector<Grid> &boards) {
   for (const Grid &board : boards) {
-    // std::cout << "Board:" << std::endl << board << std::endl;
+    std::cout << "Board:" << std::endl << board.cstr() << std::endl;
     std::cout << "Board:" << std::endl;
   }
 }
